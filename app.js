@@ -190,39 +190,72 @@
 // console.log(brad.greeting());
 
 // ES6
-class Person {
-  constructor(firstName, lastname, dob) {
-    this.firstName = firstName;
-    this.lastname = lastname;
-    this.birthday = new Date(dob);
-  }
+// class Person {
+//   constructor(firstName, lastname, dob) {
+//     this.firstName = firstName;
+//     this.lastname = lastname;
+//     this.birthday = new Date(dob);
+//   }
 
-  greeting() {
-    return `Hello there ${this.firstName} ${this.lastname}`;
-  }
+//   greeting() {
+//     return `Hello there ${this.firstName} ${this.lastname}`;
+//   }
 
-  calculateAge() {
-    const dif = Date.now() - this.birthday.getTime();
-    const age = new Date(dif);
-    return Math.abs(age.getUTCFullYear() - 1970);
-  }
+//   calculateAge() {
+//     const dif = Date.now() - this.birthday.getTime();
+//     const age = new Date(dif);
+//     return Math.abs(age.getUTCFullYear() - 1970);
+//   }
 
-  getMarried(newLastName) {
-    this.lastname = newLastName;
-  }
+//   getMarried(newLastName) {
+//     this.lastname = newLastName;
+//   }
 
-  static addNumbers(x, y) {
-    return x + y;
-  }
+//   static addNumbers(x, y) {
+//     return x + y;
+//   }
 
-}
+// }
 
-const mary = new Person('Mary', 'Shinaga', '12-12-1984');
+// const mary = new Person('Mary', 'Shinaga', '12-12-1984');
 
-console.log(mary);
-console.log(mary.greeting());
-console.log(mary.calculateAge());
-mary.getMarried('Xi\'an');
-console.log(mary.greeting());
+// console.log(mary);
+// console.log(mary.greeting());
+// console.log(mary.calculateAge());
+// mary.getMarried('Xi\'an');
+// console.log(mary.greeting());
 
-console.log(Person.addNumbers(1,2));
+// console.log(Person.addNumbers(1,2));
+
+// Sub classes - inheritance in ES6
+// class Person {
+//   constructor (firstName, lastName) {
+//     this.firstName = firstName;
+//     this.lastName = lastName;
+//   }
+
+//   greeting() {
+//     return `hello there ${this.firstName} ${this.lastName}`;
+//   }
+// }
+
+// class Customer extends Person {
+//   constructor(firstName, lastName, phone, membership) {
+//     // call the Person constructor
+//     super(firstName, lastName);
+
+//     this.phone = phone;
+//     this.membership = membership;
+//   }
+
+//   static getMembershipCost() {
+//     return 500;
+//   }
+// }
+
+// const john = new Customer('john', 'lar', '555-5555', 'god');
+
+// console.log(john);
+// console.log(john.greeting());
+// console.log(Customer.getMembershipCost());
+// console.log(Person.getMembershipCost());
