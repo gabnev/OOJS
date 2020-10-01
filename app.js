@@ -73,4 +73,48 @@
 
 // console.log(re2);
 
-// Prototypes
+// Object.prototype
+
+function Person(firstName, lastName, dob){
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.birthday = new Date(dob);
+  // this.calculateAge = () => {
+
+  //   const dif = Date.now() - this.birthday.getTime();
+  //   const ageDate = new Date(dif);
+  //   return ageDate.getUTCFullYear() - 1970;
+    
+  // }
+}
+
+// calculate age
+Person.prototype.calculateAge = function() {
+
+  const dif = Date.now() - this.birthday.getTime();
+  const ageDate = new Date(dif);
+  return ageDate.getUTCFullYear() - 1970;
+  
+}
+
+// get full name
+Person.prototype.getFullName = function() {
+  return `${this.firstName} ${this.lastName}`;
+}
+
+// get married
+Person.prototype.getsMarried = function(newLastName) {
+  this.lastName = newLastName;
+}
+
+const john = new Person('john', 'doe', '12-12-1984');
+const mary = new Person('mary', 'lane', 'December 26 1986');
+
+console.log(mary);
+console.log(john.calculateAge());
+console.log(john.getFullName());
+john.getsMarried('lane');
+console.log(john.getFullName());
+
+console.log(mary.hasOwnProperty('firstName'));
+console.log(mary.hasOwnProperty('getFullName'));
