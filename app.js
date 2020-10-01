@@ -122,40 +122,69 @@
 // inheritance
 
 // person constructor
-function Person(firstName, lastName){
-  this.firstName = firstName;
-  this.lastName = lastName;
+// function Person(firstName, lastName){
+//   this.firstName = firstName;
+//   this.lastName = lastName;
+// }
+
+// Person.prototype.greeting = function() {
+//   return `Hello there, ${this.firstName} ${this.lastName}`;
+// }
+
+// const person1 = new Person('John', 'Doe');
+
+// console.log(person1.greeting());
+
+// // consumer constructor
+
+// function Customer(firstName, lastName, phone, membership) {
+//   Person.call(this, firstName, lastName);
+//   this.phone = phone;
+//   this.membership = membership;
+// }
+
+// // Inherit the Person prototype methods
+// Customer.prototype = Object.create(Person.prototype);
+
+// // Make Customer.prototype return Customer()
+// Customer.prototype.constructor = Customer;
+
+// const Customer1 = new Customer('tom', 'smith', '555-555', 'standard');
+
+// console.log(Customer1);
+
+// // customer greeting
+// Customer.prototype.greeting = function() {
+//   return `Hello there, ${this.firstName}, welcome to our company`;
+// }
+
+// console.log(Customer1.greeting());
+
+// object.create
+const personPrototypes = {
+  greeting: function(){
+    return `Hello there ${this.firstName} ${this.lastName}`
+  },
+  getsMarried: function(newLastName) {
+    this.lastName = newLastName;
+  }
 }
 
-Person.prototype.greeting = function() {
-  return `Hello there, ${this.firstName} ${this.lastName}`;
-}
+const mary = Object.create(personPrototypes);
+mary.firstName = 'Mary';
+mary.lastName = 'Williams';
+mary.age = 30;
 
-const person1 = new Person('John', 'Doe');
+console.log(mary);
+console.log(mary.greeting());
+mary.getsMarried('Ali');
+console.log(mary.greeting());
 
-console.log(person1.greeting());
+const brad = Object.create(personPrototypes, {
+  firstName: {value: 'Brad'},
+  lastName: {value: 'Traversy'},
+  age: {value: 36}
+});
 
-// consumer constructor
-
-function Customer(firstName, lastName, phone, membership) {
-  Person.call(this, firstName, lastName);
-  this.phone = phone;
-  this.membership = membership;
-}
-
-// Inherit the Person prototype methods
-Customer.prototype = Object.create(Person.prototype);
-
-// Make Customer.prototype return Customer()
-Customer.prototype.constructor = Customer;
-
-const Customer1 = new Customer('tom', 'smith', '555-555', 'standard');
-
-console.log(Customer1);
-
-// customer greeting
-Customer.prototype.greeting = function() {
-  return `Hello there, ${this.firstName}, welcome to our company`;
-}
-
-console.log(Customer1.greeting());
+console.log(brad);
+console.log(brad.greeting());
