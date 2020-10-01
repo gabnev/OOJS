@@ -161,30 +161,68 @@
 // console.log(Customer1.greeting());
 
 // object.create
-const personPrototypes = {
-  greeting: function(){
-    return `Hello there ${this.firstName} ${this.lastName}`
-  },
-  getsMarried: function(newLastName) {
-    this.lastName = newLastName;
+// const personPrototypes = {
+//   greeting: function(){
+//     return `Hello there ${this.firstName} ${this.lastName}`
+//   },
+//   getsMarried: function(newLastName) {
+//     this.lastName = newLastName;
+//   }
+// }
+
+// const mary = Object.create(personPrototypes);
+// mary.firstName = 'Mary';
+// mary.lastName = 'Williams';
+// mary.age = 30;
+
+// console.log(mary);
+// console.log(mary.greeting());
+// mary.getsMarried('Ali');
+// console.log(mary.greeting());
+
+// const brad = Object.create(personPrototypes, {
+//   firstName: {value: 'Brad'},
+//   lastName: {value: 'Traversy'},
+//   age: {value: 36}
+// });
+
+// console.log(brad);
+// console.log(brad.greeting());
+
+// ES6
+class Person {
+  constructor(firstName, lastname, dob) {
+    this.firstName = firstName;
+    this.lastname = lastname;
+    this.birthday = new Date(dob);
   }
+
+  greeting() {
+    return `Hello there ${this.firstName} ${this.lastname}`;
+  }
+
+  calculateAge() {
+    const dif = Date.now() - this.birthday.getTime();
+    const age = new Date(dif);
+    return Math.abs(age.getUTCFullYear() - 1970);
+  }
+
+  getMarried(newLastName) {
+    this.lastname = newLastName;
+  }
+
+  static addNumbers(x, y) {
+    return x + y;
+  }
+
 }
 
-const mary = Object.create(personPrototypes);
-mary.firstName = 'Mary';
-mary.lastName = 'Williams';
-mary.age = 30;
+const mary = new Person('Mary', 'Shinaga', '12-12-1984');
 
 console.log(mary);
 console.log(mary.greeting());
-mary.getsMarried('Ali');
+console.log(mary.calculateAge());
+mary.getMarried('Xi\'an');
 console.log(mary.greeting());
 
-const brad = Object.create(personPrototypes, {
-  firstName: {value: 'Brad'},
-  lastName: {value: 'Traversy'},
-  age: {value: 36}
-});
-
-console.log(brad);
-console.log(brad.greeting());
+console.log(Person.addNumbers(1,2));
