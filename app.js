@@ -75,46 +75,87 @@
 
 // Object.prototype
 
-function Person(firstName, lastName, dob){
+// function Person(firstName, lastName, dob){
+//   this.firstName = firstName;
+//   this.lastName = lastName;
+//   this.birthday = new Date(dob);
+//   // this.calculateAge = () => {
+
+//   //   const dif = Date.now() - this.birthday.getTime();
+//   //   const ageDate = new Date(dif);
+//   //   return ageDate.getUTCFullYear() - 1970;
+    
+//   // }
+// }
+
+// // calculate age
+// Person.prototype.calculateAge = function() {
+
+//   const dif = Date.now() - this.birthday.getTime();
+//   const ageDate = new Date(dif);
+//   return ageDate.getUTCFullYear() - 1970;
+  
+// }
+
+// // get full name
+// Person.prototype.getFullName = function() {
+//   return `${this.firstName} ${this.lastName}`;
+// }
+
+// // get married
+// Person.prototype.getsMarried = function(newLastName) {
+//   this.lastName = newLastName;
+// }
+
+// const john = new Person('john', 'doe', '12-12-1984');
+// const mary = new Person('mary', 'lane', 'December 26 1986');
+
+// console.log(mary);
+// console.log(john.calculateAge());
+// console.log(john.getFullName());
+// john.getsMarried('lane');
+// console.log(john.getFullName());
+
+// console.log(mary.hasOwnProperty('firstName'));
+// console.log(mary.hasOwnProperty('getFullName'));
+
+// inheritance
+
+// person constructor
+function Person(firstName, lastName){
   this.firstName = firstName;
   this.lastName = lastName;
-  this.birthday = new Date(dob);
-  // this.calculateAge = () => {
-
-  //   const dif = Date.now() - this.birthday.getTime();
-  //   const ageDate = new Date(dif);
-  //   return ageDate.getUTCFullYear() - 1970;
-    
-  // }
 }
 
-// calculate age
-Person.prototype.calculateAge = function() {
-
-  const dif = Date.now() - this.birthday.getTime();
-  const ageDate = new Date(dif);
-  return ageDate.getUTCFullYear() - 1970;
-  
+Person.prototype.greeting = function() {
+  return `Hello there, ${this.firstName} ${this.lastName}`;
 }
 
-// get full name
-Person.prototype.getFullName = function() {
-  return `${this.firstName} ${this.lastName}`;
+const person1 = new Person('John', 'Doe');
+
+console.log(person1.greeting());
+
+// consumer constructor
+
+function Customer(firstName, lastName, phone, membership) {
+  Person.call(this, firstName, lastName);
+  this.phone = phone;
+  this.membership = membership;
 }
 
-// get married
-Person.prototype.getsMarried = function(newLastName) {
-  this.lastName = newLastName;
+// Inherit the Person prototype methods
+Customer.prototype = Object.create(Person.prototype);
+
+// Make Customer.prototype return Customer()
+Customer.prototype.constructor = Customer;
+
+const Customer1 = new Customer('tom', 'smith', '555-555', 'standard');
+
+console.log(Customer1);
+
+// customer greeting
+Customer.prototype.greeting = function() {
+  return `Hello there, ${this.firstName}, welcome to our company`;
 }
 
-const john = new Person('john', 'doe', '12-12-1984');
-const mary = new Person('mary', 'lane', 'December 26 1986');
-
-console.log(mary);
-console.log(john.calculateAge());
-console.log(john.getFullName());
-john.getsMarried('lane');
-console.log(john.getFullName());
-
-console.log(mary.hasOwnProperty('firstName'));
-console.log(mary.hasOwnProperty('getFullName'));
+console.log(Customer1.greeting());
